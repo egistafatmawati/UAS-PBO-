@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="aplikasi.FXMLDocumentController">
+    <children>
+        <AnchorPane fx:id="menuUtama" prefHeight="600.0" prefWidth="600.0">
+            <children>
+                <Button fx:id="mulaiButton" layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#mulaiGame" text="Mulai"/>
+                <Button fx:id="keluarButton" layoutX="250.0" layoutY="250.0" mnemonicParsing="false" onAction="#keluar" text="Keluar"/>
+            </children>
+        </AnchorPane>
+
+        <AnchorPane fx:id="gameScreen" prefHeight="600.0" prefWidth="600.0" visible="false">
+            <children>
+                <Canvas fx:id="kanvas" height="500.0" width="500.0" layoutX="50.0" layoutY="50.0"/>
+                <Button fx:id="mainLagiButton" layoutX="250.0" layoutY="350.0" mnemonicParsing="false" onAction="#mainLagi" text="Main Lagi" visible="false"/>
+                <Button fx:id="keluarGameOverButton" layoutX="250.0" layoutY="400.0" mnemonicParsing="false" onAction="#keluar" text="Keluar" visible="false"/>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
