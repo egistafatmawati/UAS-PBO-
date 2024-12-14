@@ -1,53 +1,81 @@
 package aplikasi;
 
-import javafx.animation.AnimationTimer;
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
 import javafx.scene.text.Font;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 import java.util.Random;
+
 
 public class FXMLDocumentController {
 
-    // Variabel untuk permainan
-    static double kecepatan = 3.0; // Kecepatan awal
-    static final double maxKecepatan = 10.0; // Kecepatan maksimum
-    static final double incrementKecepatan = 0.1; // Penambahan kecepatan setiap kali skor naik
-    static int lebar = 20;    // Lebar grid
-    static int tinggi = 20;   // Tinggi grid
-    static int ukuranSisi = 25; // Ukuran setiap sisi grid
-    static List<Segmen> ular = new ArrayList<>();
-    static Arah arah = Arah.kiri; // Arah awal ular
-    static boolean gameOver = false;
-    static Random rand = new Random();
-    static Makanan makanan;
-    static Image kepalaUlar; // Gambar kepala ular
-    static int skor = 0; // Variabel untuk menyimpan skor
 
-    // Enum Arah
-    public enum Arah {
-        kiri, kanan, atas, bawah
-    }
+// Variabel untuk permainan
 
-    // Kelas Segmen untuk mendefinisikan bagian tubuh ular
-    public static class Segmen {
-        private int x, y;
+static double kecepatan = 3.0; // Kecepatan awal
 
-        public Segmen(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
+static final double maxKecepatan = 10.0; // Kecepatan maksimum
 
-        public int getX() { return x; }
-        public int getY() { return y; }
+static final double incrementKecepatan = 0.1; // Penambahan kecepatan setiap kali skor naik
+
+static int lebar = 20; // Lebar grid
+
+static int tinggi = 20; // Tinggi grid
+
+static int ukuranSisi = 25; // Ukuran setiap sisi grid
+
+static List<Segmen> ular = new ArrayList<>();
+
+static Arah arah = Arah.kiri; // Arah awal ular
+
+static boolean gameOver = false;
+
+static Random rand = new Random();
+
+static Makanan makanan;
+
+static Image kepalaUlar; // Gambar kepala ular
+
+static Image background; // Gambar background
+
+static int skor = 0; // Variabel untuk menyimpan skor
+
+
+// Enum Arah
+
+public enum Arah {
+
+kiri, kanan, atas, bawah
+
+}
+
+
+// Kelas Segmen untuk mendefinisikan bagian tubuh ular
+
+public static class Segmen {
+
+private int x, y;
+
+
+public Segmen(int x, int y) {
+
+this.x = x;
+
+this.y = y;
+
+}
+
+
+public int getX() { return x; }
+
+public int getY() { return y; }
+
+
 
         public void setX(int x) { this.x = x; }
         public void setY(int y) { this.y = y; }
@@ -109,6 +137,7 @@ public class FXMLDocumentController {
     // Inisialisasi permainan
     public void initialize() {
         kepalaUlar = new Image(getClass().getResource("/aplikasi/upmouth.png").toExternalForm());
+        background = new Image(getClass().getResource("/aplikasi/bg2.png").toExternalForm()); // Memuat gambar latar belakang
         kanvas.setFocusTraversable(true);
         kanvas.requestFocus();  // Pastikan kanvas menerima fokus untuk menangkap input keyboard
 
@@ -194,8 +223,7 @@ public class FXMLDocumentController {
         }
 
         // Gambar latar belakang
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, lebar * ukuranSisi, tinggi * ukuranSisi);
+        gc.drawImage(background, 0, 0, lebar * ukuranSisi, tinggi * ukuranSisi);
 
         // Gambar makanan
         gc.setFill(makanan.getWarna());
