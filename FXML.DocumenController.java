@@ -1,81 +1,55 @@
+// File: FXMLDocumentController.java
 package aplikasi;
 
+import javafx.animation.AnimationTimer;
+import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-
 import javafx.scene.text.Font;
 
-
 import java.util.ArrayList;
-
 import java.util.List;
-
 import java.util.Random;
-
 
 public class FXMLDocumentController {
 
+    // Variabel untuk permainan
+    static double kecepatan = 3.0; // Kecepatan awal
+    static final double maxKecepatan = 10.0; // Kecepatan maksimum
+    static final double incrementKecepatan = 0.1; // Penambahan kecepatan setiap kali skor naik
+    static int lebar = 20;    // Lebar grid
+    static int tinggi = 20;   // Tinggi grid
+    static int ukuranSisi = 25; // Ukuran setiap sisi grid
+    static List<Segmen> ular = new ArrayList<>();
+    static Arah arah = Arah.kiri; // Arah awal ular
+    static boolean gameOver = false;
+    static Random rand = new Random();
+    static Makanan makanan;
+    static Image kepalaUlar; // Gambar kepala ular
+    static Image background; // Gambar background
+    static int skor = 0; // Variabel untuk menyimpan skor
 
-// Variabel untuk permainan
+    // Enum Arah
+    public enum Arah {
+        kiri, kanan, atas, bawah
+    }
 
-static double kecepatan = 3.0; // Kecepatan awal
+    // Kelas Segmen untuk mendefinisikan bagian tubuh ular
+    public static class Segmen {
+        private int x, y;
 
-static final double maxKecepatan = 10.0; // Kecepatan maksimum
+        public Segmen(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
 
-static final double incrementKecepatan = 0.1; // Penambahan kecepatan setiap kali skor naik
-
-static int lebar = 20; // Lebar grid
-
-static int tinggi = 20; // Tinggi grid
-
-static int ukuranSisi = 25; // Ukuran setiap sisi grid
-
-static List<Segmen> ular = new ArrayList<>();
-
-static Arah arah = Arah.kiri; // Arah awal ular
-
-static boolean gameOver = false;
-
-static Random rand = new Random();
-
-static Makanan makanan;
-
-static Image kepalaUlar; // Gambar kepala ular
-
-static Image background; // Gambar background
-
-static int skor = 0; // Variabel untuk menyimpan skor
-
-
-// Enum Arah
-
-public enum Arah {
-
-kiri, kanan, atas, bawah
-
-}
-
-
-// Kelas Segmen untuk mendefinisikan bagian tubuh ular
-
-public static class Segmen {
-
-private int x, y;
-
-
-public Segmen(int x, int y) {
-
-this.x = x;
-
-this.y = y;
-
-}
-
-
-public int getX() { return x; }
-
-public int getY() { return y; }
-
-
+        public int getX() { return x; }
+        public int getY() { return y; }
 
         public void setX(int x) { this.x = x; }
         public void setY(int y) { this.y = y; }
